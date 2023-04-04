@@ -56,7 +56,6 @@ ul {
   border-radius: 80px;
   padding: 20px;
   background-color: #eee9e6;
-  color: white;
 }
 
 .addButton {
@@ -64,7 +63,7 @@ ul {
   background: #eee9e6;
   height: 30px;
   width: 30px;
-  border: none;
+  /* border: none; */
   border-radius: 40px;
 }
 

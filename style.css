@@ -77,3 +77,12 @@ li {
   color: #82674e;
   font-weight: bold;
 }
+
+.deleteButton {
+  background-color: #eee9e6;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 40px;
+  margin-left: 20px;
+}

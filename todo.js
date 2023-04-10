@@ -1,7 +1,17 @@
+// Array to store tasks
+const tasks = [];
+
 function onLoadHandler() {
   // Clicking the "+" button -> addToTaskList function
   const addButtonElement = document.getElementById("addButton");
   addButtonElement.addEventListener("click", addToTaskList);
+
+  // Load tasks from localStorage if available
+  const savedTasks = localStorage.getItem("tasks");
+  if (savedTasks) {
+    tasks.push(...JSON.parse(savedTasks));
+    displayTasks();
+  }
 }
 
 // Add new task to the tasklist
@@ -15,42 +25,62 @@ function addToTaskList() {
     return;
   }
 
-  // Makes a list out of the input value
+  // Add task to tasks array
+  tasks.push({ taskName: inputValue, completed: false });
+  displayTasks();
+  inputElement.value = ""; // Clear input value after adding task
+}
+
+// Display tasks in the tasklist
+function displayTasks() {
   const taskListElement = document.getElementById("taskList");
-  const addedTaskElement = document.createElement("li");
-  addedTaskElement.innerText = inputValue;
+  taskListElement.innerHTML = ""; // Clear existing tasks
 
-  // Create a delete button
-  const deleteButtonElement = document.createElement("button");
-  deleteButtonElement.innerText = "Delete";
-  deleteButtonElement.classList.add("deleteButton");
+  // Loop through tasks array and create HTML elements
+  for (let i = 0; i < tasks.length; i++) {
+    const task = tasks[i];
+    const taskElement = document.createElement("li");
+    taskElement.innerText = task.taskName;
 
-  // Delete task with the delete button
-  deleteButtonElement.addEventListener("click", removeElement);
-  function removeElement() {
-    const element = this.parentNode;
-    element.parentNode.removeChild(element);
-  }
-
-  // Mark task as done or not
-  addedTaskElement.addEventListener("click", markTask);
-  function markTask() {
-    if (addedTaskElement.style.textDecoration === "line-through") {
-      addedTaskElement.style.textDecoration = "none";
-      addedTaskElement.style.color = "#82674e";
+    // Mark task as done or not
+    if (task.completed) {
+      taskElement.style.textDecoration = "line-through";
+      taskElement.style.color = "gray";
     } else {
-      addedTaskElement.style.textDecoration = "line-through";
-      addedTaskElement.style.color = "gray";
+      taskElement.style.textDecoration = "none";
+      taskElement.style.color = "#82674e";
     }
+
+    // Create a delete button
+    const deleteButtonElement = document.createElement("button");
+    deleteButtonElement.innerText = "Delete";
+    deleteButtonElement.classList.add("deleteButton");
+
+    // Delete task with the delete button
+    deleteButtonElement.addEventListener("click", () => {
+      tasks.splice(i, 1);
+      displayTasks();
+    });
+
+    // Toggle marked task (completed or not) by click, then update tasklist display
+    taskElement.addEventListener("click", () => {
+      task.completed = !task.completed;
+      displayTasks();
+    });
+
+    // Makes delete button a child of taskElement
+    taskElement.appendChild(deleteButtonElement);
+    // Makes taskElement a child of taskListElement
+    taskListElement.appendChild(taskElement);
   }
 
-  // Makes delete button a child of addedTaskElement
-  addedTaskElement.appendChild(deleteButtonElement);
-  // Makes added task a child of taskLiskElement
-  taskListElement.appendChild(addedTaskElement);
+  // Save tasks to localStorage
+  saveTasksToLocalStorage();
+}
 
-  // Clear input value after adding task
-  inputElement.value = "";
+// Save tasks to localStorage
+function saveTasksToLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
 window.addEventListener("load", onLoadHandler);

@@ -48,7 +48,7 @@ function displayTasks() {
       taskElement.style.color = "gray";
     } else {
       taskElement.style.textDecoration = "none";
-      taskElement.style.color = "#82674e";
+      taskElement.style.color = "#090502";
     }
 
     // Create a delete button

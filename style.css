@@ -1,10 +1,12 @@
 body {
-  background: #eee5dc;
-  margin: 0px;
+  background-color: #7f5e54;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  margin: 0;
+  padding: 0;
 }
 
 .header {
-  color: #82674e;
+  color: #090502;
   margin-top: 8rem;
   text-align: center;
 }
@@ -21,13 +23,13 @@ main {
   align-items: center;
   width: 300px;
   gap: 10px;
-  background-color: #b7cbb0;
+  background-color: #ddd4c4;
   padding-top: 4rem;
   padding-left: 4rem;
   padding-right: 4rem;
   padding-bottom: 1rem;
   border-top-right-radius: 80px;
-  border-top-left-radius: 10px;
+  border-top-left-radius: 20px;
 }
 
 ul {
@@ -41,10 +43,10 @@ ul {
   padding-left: 4rem;
   padding-right: 4rem;
   padding-bottom: 4rem;
-  border-bottom-right-radius: 10px;
+  border-bottom-right-radius: 20px;
   border-bottom-left-radius: 80px;
   gap: 20px;
-  background-color: #b7cbb0;
+  background-color: #ddd4c4;
 }
 
 .inputContainer {
@@ -66,6 +68,7 @@ ul {
   border: none;
   border-radius: 40px;
   cursor: pointer;
+  color: #dab970;
 }
 
 .containerList {
